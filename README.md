@@ -3,7 +3,7 @@
 通过zookeeper的动态配置功能 实现 hystrix 动态配置
 
 ### 访问和启动方式
-sprig boot项目， 可以直接通过idea run， 用访问 http://localhost:8080/cache , 查看日志 
+spring boot项目， 可以直接通过idea run， 用访问 http://localhost:8080/cache , 查看日志 
 
 ### 实现方式
 
@@ -12,31 +12,6 @@ sprig boot项目， 可以直接通过idea run， 用访问 http://localhost:808
 通过动态修改 hystrix.command.ExampleKey.execution.isolation.thread.timeoutInMilliseconds=4000 属性，程序就会走完正常的run方法
 
 其中commandKey 相关的配置请查看hystrix文档。
-
-### zookeeper 环境搭建
-
-[zookeeper docker](https://hub.docker.com/_/zookeeper/)
-
-ZookeeperConfig (znode和ip配置)
-
-```
-
-docker run --name some-zookeeper --restart always -d zookeeper -P
-
-//端口映射
-docker port some-zookeeper
-
-//创建path
-
-docker run -it --rm --link some-zookeeper:zookeeper zookeeper zkCli.sh -server zookeeper
-
-// 创建节点，数据存储在节点上，nodecache
-create path /myapp/config "hystrix.command.ExampleKey.execution.isolation.thread.timeoutInMilliseconds=4000"
-
-// 创建节点，pathcache
-create path /myapp/config/hystrix.command.ExampleKey.execution.isolation.thread.timeoutInMilliseconds 4000
-
-``` 
 
 
 ### curator 实现
